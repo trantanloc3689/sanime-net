@@ -31,6 +31,7 @@ function to_slug(str)
 }
 
 module.exports = {
+    
     getAdd:(req, res, next) => res.render('admin/addfilm'),
     postAdd: (req, res, next) => {
     },

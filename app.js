@@ -6,6 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var hbs = require('express-handlebars');
 var mongoose = require('mongoose');
+var session = require("express-session");
+var passport = require('passport')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -19,6 +21,10 @@ mongoose.connect('mongodb://localhost:27017/sanime',{ useNewUrlParser: true }).t
   () => console.log('ket noi thanh cong'),
   err => console.log('ket noi that bai') 
 );
+// khoi tao session
+app.use(session({secret:'ddgfhjwrertysdf'}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // view engine setup
 var hbsConfig = hbs.create({
@@ -38,9 +44,25 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+//config passport
+require('./config/passport')(passport);
+// Hàm được sử dụng để kiểm tra đã login hay chưa
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated())
+      return next();
+  res.redirect('/login');
+}
 //router
 app.use('/', indexRouter);
-app.use('/admin', adminRouter);
+app.get('/login', function(req, res) {
+  res.render('login.hbs'); 
+});
+app.post('/login', passport.authenticate('local-login', {
+  successRedirect : '/admin',
+  failureRedirect : '/login', 
+  failureFlash : true
+}));
+app.use('/admin',isLoggedIn, adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
