@@ -1,4 +1,4 @@
-var postModel = require('../models/postModel');
+var postModel = require('../models/posts');
 
 function to_slug(str)
 {

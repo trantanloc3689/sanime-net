@@ -7,10 +7,11 @@ var bodyParser   = require('body-parser');
 var hbs = require('express-handlebars');
 var mongoose = require('mongoose');
 var session = require("express-session");
-var passport = require('passport')
+var passport = require('passport');
+var flash    = require('connect-flash');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+//var signRouter = require('./routes/users');
 var adminRouter = require('./routes/admin');
 
 var app = express();
@@ -54,14 +55,7 @@ function isLoggedIn(req, res, next) {
 }
 //router
 app.use('/', indexRouter);
-app.get('/login', function(req, res) {
-  res.render('login.hbs'); 
-});
-app.post('/login', passport.authenticate('local-login', {
-  successRedirect : '/admin',
-  failureRedirect : '/login', 
-  failureFlash : true
-}));
+require('./routes/auth')(app,passport);
 app.use('/admin',isLoggedIn, adminRouter);
 
 // catch 404 and forward to error handler
