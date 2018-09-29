@@ -4,7 +4,7 @@ var postSchema = mongoose.Schema({
     name: String,
     name_slug: String,
     description: String,
-    url_images: String,
+    url_image: String,
     updated_by: String,
     episode:[{
         chap: Number,

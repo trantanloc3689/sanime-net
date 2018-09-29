@@ -1,0 +1,46 @@
+
+    <div id="wrapper">
+      {{>navbarAdmin}}
+
+        <div id="page-wrapper">
+            <div class="space"></div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            ADD ANIME
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <form role="form" method="POST">
+                                        <div class="form-group">
+                                            <label>Name of Anime:</label>
+                                            <input name="name" class="form-control" placeholder="Enter Name of Anime... ">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Input url Image:</label>
+                                            <input name="url_image" class="form-control" placeholder="Enter Url Image... ">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Description: </label>
+                                            <textarea name="description" class="form-control" rows="3"></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-default">Post</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+    {{>footer}}

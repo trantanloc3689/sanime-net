@@ -1,0 +1,24 @@
+
+    <div id="wrapper">
+      {{>navbarHome}}
+        <div id="page-wrapper">
+            <div class="space"></div>
+            {{#each posts}}
+                <div class="col-xs-12 col-sm-4 col-md-3">
+                    <a href="/detail/{{this.name_slug}}/1" class="card">
+                        <div class="figure">
+                            <img src="{{this.url_image}}" alt="image">
+                            <div class="figCaption">
+                                <div class="figType1">{{this.name}}</div>
+                            </div>
+                            <div class="figView"><span class="icon-eye"></span></div>
+                            <div class="figType">HOT</div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </a>
+                </div>
+            {{/each}}
+        </div>
+        <!-- /#page-wrapper -->  
+    </div>
+    {{>footer}}
